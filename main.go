@@ -15,7 +15,25 @@ func main() {
 	o := flag.String("o", "", "Write output to this file instead of stdout")
 	flag.Parse()
 
-	out, err := toJSON(os.Stdin)
+	// If there are more than 1 positional arguments, raise error.
+	if flag.NArg() > 1 {
+		flag.Usage()
+		os.Exit(1)
+	}
+
+	// If there are no position arguments, then read from STDIN.
+	// If there is one positional argument, then read from that file.
+	input := os.Stdin
+	if flag.NArg() == 1 {
+		var err error
+		input, err = os.Open(flag.Arg(0))
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+	}
+
+	out, err := toJSON(input)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
