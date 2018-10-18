@@ -10,7 +10,7 @@ Convert JSON to YAML with [jy](https://github.com/sourcegraph/jy).
 $ echo "hello: world" | yj
 {"hello":"world"}
 
-$ yj sample.yml -o result.json
+$ yj input.yml -o output.json
 ```
 
 ## Install
