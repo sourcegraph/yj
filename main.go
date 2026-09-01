@@ -5,7 +5,6 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 
 	yaml "gopkg.in/yaml.v2"
@@ -51,7 +50,7 @@ func main() {
 }
 
 func toJSON(r io.Reader) ([]byte, error) {
-	ybuf, err := ioutil.ReadAll(r)
+	ybuf, err := io.ReadAll(r)
 	if err != nil {
 		return nil, err
 	}
